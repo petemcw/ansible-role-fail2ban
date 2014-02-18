@@ -1,0 +1,19 @@
+---
+# Handlers for fail2ban notifications.
+
+- name: stop fail2ban
+  service: >
+    name={{ fail2ban_service }}
+    state=stopped
+
+- name: start fail2ban
+  service: >
+    name={{ fail2ban_service }}
+    state=started
+    enabled=yes
+
+- name: restart fail2ban
+  service: >
+    name={{ fail2ban_service }}
+    state=restarted
+    enabled=yes

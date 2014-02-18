@@ -1,0 +1,23 @@
+# {{ ansible_managed }}
+
+[DEFAULT]
+
+{% if fail2ban_ignoreip %}
+ignoreip  = {{ fail2ban_ignoreip|join(' ') }}
+{% endif %}
+bantime   = {{ fail2ban_bantime }}
+maxretry  = {{ fail2ban_maxretry }}
+banaction = {{ fail2ban_banaction }}
+action    = {{ fail2ban_action }}
+destemail = {{ fail2ban_destemail }}
+
+[ssh]
+enabled   = true
+port      = {{ fail2ban_sshport }}
+
+[ssh-ddos]
+enabled   = true
+
+[postfix]
+enabled   = true
+maxretry  = 1

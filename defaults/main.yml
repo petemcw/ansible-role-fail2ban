@@ -1,0 +1,12 @@
+---
+# The variables file used for fail2ban playbooks.
+# If not overriden in inventory or as a parameter, this is the value that will be used
+
+fail2ban_ignoreip:
+  - 127.0.0.1/8
+fail2ban_bantime: 86400
+fail2ban_maxretry: 3
+fail2ban_banaction: 'iptables-multiport'
+fail2ban_action: '%(action_mwl)s'
+fail2ban_destemail: 'root@localhost'
+fail2ban_sshport: 22

@@ -1,0 +1,40 @@
+---
+# Defines tasks to install and configure fail2ban
+
+- name: Include the OS specific varibles
+  include_vars: '{{ ansible_os_family }}.yml'
+  tags:
+    - common
+    - fail2ban
+
+- name: Install packages for Debian derivatives
+  apt: >
+    pkg={{ item }}
+    update_cache=yes
+    state=latest
+  with_items: fail2ban_packages
+  when: ansible_os_family == 'Debian'
+  tags:
+    - common
+    - fail2ban
+
+- name: Write fail2ban configuration template
+  template: >
+    src=jail-local.j2
+    dest={{ fail2ban_config_dir }}/jail.local
+    mode=0644 owner=root group=root
+    backup=yes
+  notify:
+    - restart fail2ban
+  tags:
+    - common
+    - fail2ban
+
+- name: Start fail2ban on server boot
+  service: >
+    name={{ fail2ban_service }}
+    state=started
+    enabled=yes
+  tags:
+    - common
+    - fail2ban
