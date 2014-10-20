@@ -20,10 +20,13 @@
 
 - name: Write fail2ban configuration template
   template: >
-    src=jail-local.j2
-    dest={{ fail2ban_config_dir }}/jail.local
+    src={{ item.src }}
+    dest={{ item.dest }}
     mode=0644 owner=root group=root
-    backup=yes
+  with_items:
+    - { src: 'jail-local.j2',          dest: '{{ fail2ban_config_dir }}/jail.local' }
+    - { src: 'sendmail-conf.j2',       dest: '{{ fail2ban_config_dir }}/action.d/sendmail.conf' }
+    - { src: 'sendmail-whois-conf.j2', dest: '{{ fail2ban_config_dir }}/action.d/sendmail-whois.conf' }
   notify:
     - restart fail2ban
   tags:
