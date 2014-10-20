@@ -1,10 +1,13 @@
 # Fail2ban Role for Ansible
 
-This role installs [fail2ban](http://www.fail2ban.org/) which is a service that scans log files (e.g. /var/log/apache/error_log) and bans IPs that show malicious signs.
+This role installs [fail2ban](http://www.fail2ban.org/) which is a service that
+scans log files (e.g. /var/log/apache/error_log) and bans IPs that show malicious
+signs.
 
 ## Requirements
 
-This role requires [Ansible](http://www.ansibleworks.com/) version 1.4 or higher and the Debian/Ubuntu platform.
+This role requires [Ansible](http://www.ansibleworks.com/) version 1.4 or higher
+and the Debian/Ubuntu platform.
 
 ## Role Variables
 
@@ -42,7 +45,7 @@ fail2ban_sshport: 22
     ```yaml
     ---
     # This playbook installs fail2ban
-    
+
     - name: Apply fail2ban to all nodes
       hosts: all
       roles:
@@ -54,7 +57,7 @@ fail2ban_sshport: 22
     ```yaml
     ---
     # This playbook installs fail2ban
-    
+
     - name: Apply fail2ban to all nodes
       hosts: all
       roles:
